@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Games Hub</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+}
+header{
+    padding:20px;
+    background:black;
+    border-bottom:2px solid lime;
+}
+.game-box{
+    background:#020617;
+    margin:15px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid lime;
+}
+button{
+    padding:8px 14px;
+    margin:4px;
+    font-size:15px;
+    border:none;
+    border-radius:6px;
+    background:lime;
+    cursor:pointer;
+}
+input{
+    padding:6px;
+    width:100px;
+    text-align:center;
+}
+footer{
+    padding:15px;
+    background:black;
+    color:lime;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎮 Mini Games Hub</h1>
+<p>Play & Enjoy</p>
+</header>
+
+<div id="games"></div>
+
+<footer>
+⭐ Made by <b>Misvin</b>
+</footer>
+
+<script>
+// ================================
+// MINI GAMES HUB – MADE BY MISVIN
+// ALL GAMES INCLUDED
+// ================================
+
+const games = document.getElementById("games");
+
+function addGame(title, html){
+    const d=document.createElement("div");
+    d.className="game-box";
+    d.innerHTML="<h2>"+title+"</h2>"+html;
+    games.appendChild(d);
+}
+
+/* 1 CLICK COUNTER */
+let c=0;
+addGame("1️⃣ Click Counter",`
+<p id="c">0</p>
+<button onclick="cAdd()">Click</button>
+<button onclick="cReset()">Reset</button>
+`);
+function cAdd(){c++;document.getElementById("c").innerText=c}
+function cReset(){c=0;document.getElementById("c").innerText=0}
+
+/* 2 CALCULATOR */
+addGame("2️⃣ Calculator",`
+<input id="a" type="number">
+<input id="b" type="number"><br><br>
+<button onclick="calc('+')">+</button>
+<button onclick="calc('-')">-</button>
+<button onclick="calc('*')">×</button>
+<button onclick="calc('/')">÷</button>
+<p id="cr"></p>
+`);
+function calc(o){
+let x=+a.value,y=+b.value;
+cr.innerText="Result: "+(
+o=="+"?x+y:o=="-"?x-y:o=="*"?x*y:y?x/y:"Error"
+);
+}
+
+/* 3 GUESS NUMBER */
+let sec=Math.floor(Math.random()*10)+1;
+addGame("3️⃣ Guess Number (1-10)",`
+<input id="g" type="number">
+<button onclick="guess()">Guess</button>
+<p id="gr"></p>
+`);
+function guess(){gr.innerText=(+g.value===sec)?"Correct":"Wrong"}
+
+/* 4 COLOR CHANGER */
+addGame("4️⃣ Color Changer",`
+<button onclick="color()">Change Background</button>
+`);
+function color(){
+document.body.style.background=`hsl(${Math.random()*360},40%,20%)`;
+}
+
+/* 5 TIMER */
+let t=0,ti;
+addGame("5️⃣ Timer",`
+<p id="tm">0</p>
+<button onclick="tStart()">Start</button>
+<button onclick="tStop()">Stop</button>
+`);
+function tStart(){ti=setInterval(()=>tm.innerText=++t,1000)}
+function tStop(){clearInterval(ti)}
+
+/* 6 ROCK PAPER SCISSORS */
+addGame("6️⃣ Rock Paper Scissors",`
+<button onclick="rps('Rock')">Rock</button>
+<button onclick="rps('Paper')">Paper</button>
+<button onclick="rps('Scissors')">Scissors</button>
+<p id="r"></p>
+`);
+function rps(u){
+let c=["Rock","Paper","Scissors"][Math.floor(Math.random()*3)];
+r.innerText=`You:${u} | CPU:${c} | `+
+(u==c?"Draw":(u=="Rock"&&c=="Scissors")||(u=="Paper"&&c=="Rock")||(u=="Scissors"&&c=="Paper")?"Win":"Lose");
+}
+
+/* 7 DICE */
+addGame("7️⃣ Dice Roll",`
+<button onclick="dice()">Roll</button>
+<p id="d"></p>
+`);
+function dice(){d.innerText=Math.ceil(Math.random()*6)}
+
+/* 8 RANDOM QUOTE */
+const quotes=["Never give up","Be strong","You can do it","Believe"];
+addGame("8️⃣ Random Quote",`
+<button onclick="quote()">Get Quote</button>
+<p id="q"></p>
+`);
+function quote(){q.innerText=quotes[Math.floor(Math.random()*quotes.length)]}
+
+/* 9 EMOJI PICKER */
+const emojis=["😀","🔥","🎮","💪","🚀","❤️"];
+addGame("9️⃣ Emoji Picker",`
+<button onclick="emo()">Pick</button>
+<p id="e"></p>
+`);
+function emo(){e.innerText=emojis[Math.floor(Math.random()*emojis.length)]}
+
+/* 10 RANDOM NUMBER */
+addGame("🔟 Random Number",`
+<button onclick="rand()">Generate</button>
+<p id="rn"></p>
+`);
+function rand(){rn.innerText=Math.floor(Math.random()*100)}
+
+/* 11 YES / NO */
+addGame("1️⃣1️⃣ Yes or No",`
+<button onclick="yn()">Ask</button>
+<p id="y"></p>
+`);
+function yn(){y.innerText=Math.random()>0.5?"YES":"NO"}
+
+/* 12 COUNTDOWN */
+let cd=10;
+addGame("1️⃣2️⃣ Countdown",`
+<p id="cdt">10</p>
+<button onclick="count()">Start</button>
+`);
+function count(){
+cd=10;cdt.innerText=cd;
+let x=setInterval(()=>{
+cdt.innerText=--cd;
+if(cd<=0)clearInterval(x);
+},1000)
+}
+
+/* 13 MATH QUIZ */
+addGame("1️⃣3️⃣ Math Quiz",`
+<p id="mq"></p>
+<button onclick="quiz()">New</button>
+`);
+function quiz(){
+let x=Math.ceil(Math.random()*10),y=Math.ceil(Math.random()*10);
+mq.innerText=`${x} + ${y} = ${x+y}`;
+}
+
+/* 14 LUCKY SPIN */
+addGame("1️⃣4️⃣ Lucky Spin",`
+<button onclick="spin()">Spin</button>
+<p id="sp"></p>
+`);
+function spin(){
+sp.innerText=["WIN","LOSE","TRY AGAIN"][Math.floor(Math.random()*3)]
+}
+
+/* 15 REACTION TEST */
+let st;
+addGame("1️⃣5️⃣ Reaction Test",`
+<button onclick="react()">Start</button>
+<p id="rt"></p>
+`);
+function react(){
+rt.innerText="WAIT...";
+setTimeout(()=>{
+st=Date.now();
+rt.innerText="CLICK!";
+document.body.onclick=()=>{
+rt.innerText=(Date.now()-st)+" ms";
+document.body.onclick=null;
+}
+},Math.random()*3000+1000)
+}
+</script>
+
+</body>
+</html>
